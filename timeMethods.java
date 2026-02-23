@@ -16,9 +16,22 @@ public class timeMethods{
     int n=N;
     int repetittion , repetitions = 30;
 
-    runTime = 0;
-   for(repetition = 0; repetition < repetitions; repetition++) {
+    runTime = 0 ;
+    for(repitition = 0; repitition < repititions ; repitition ++ ) {
       start = System.currentTimeMillis();
+
+      for(int i = 0; i < 30; i++) {
+          int randomKey = 1 + (int)(Math.random() * 32654);
+          linearsearch(array, randomKey);
+    }
+
+    finish = System.currentTimeMillis();
+
+    time = (double)(finish - start);
+    runTime += time;
+    runTime2 += (time*time);
+}
+    
 
     
     
