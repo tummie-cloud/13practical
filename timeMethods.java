@@ -16,6 +16,10 @@ public class timeMethods{
     int n=N;
     int repetittion , repetitions = 30;
 
+    runTime = 0;
+   for(repetition = 0; repetition < repetitions; repetition++) {
+      start = System.currentTimeMillis();
+
     
     
   }
