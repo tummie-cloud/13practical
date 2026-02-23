@@ -18,32 +18,37 @@ public class timeMethods{
         DecimalFormat fourD= new DecimalFormat("0.0000");
         DecimalFormart fiveD= new DecimalFormat("0.00000");
 
-        long start, finish;
-        double runTime = 0 , runTime2= 0 , time;
-        double totalTime = 0.0 ;
-        int n=N;
-        int repetittion , repetitions = 30;
+       long start, finish;
+       double linearRunTime = 0, linearRunTime2 = 0;
+       double binaryRunTime = 0, binaryRunTime2 = 0;
+       double time;
+       int repetition, repetitions = 30;
+       Random rand = new Random();
 
-    runTime = 0 ;
-    for(repitition = 0; repitition < repititions ; repitition ++ ) {
-      start = System.currentTimeMillis();
+       // Read data from file
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("ulysses.numbered"));
+            String line;
 
-      for(int i = 0; i < 30; i++) {
-          int randomKey = 1 + (int)(Math.random() * 32654);
-          linearsearch(array, randomKey);
-    }
+            while ((line = reader.readLine()) != null) {
+                if (line.length() >= 5) {
+                    try {
+                        int key = Integer.parseInt(line.substring(0, 5).trim());
+                        String data = line.substring(5);
+                        if (key >= 1 && key <= N) {
+                            records[key] = new Node(key, data);
+                        }
+                    } catch (NumberFormatException e) {
+                        
+                    }
+                }
+            }
+            reader.close();
+        
 
-    finish = System.currentTimeMillis();
+  
 
-    time = (double)(finish - start);
-    runTime += time;
-    runTime2 += (time*time);
-}
     
-
     
-    
-  }
-}  
   
 
