@@ -53,7 +53,7 @@ public class timeMethods{
                 sortedRecords[i] = records[i];
             }
 
-            // Sort for binary search (excluding index 0)
+            
             Arrays.sort(sortedRecords, 1, N + 1, (a, b) -> Integer.compare(a.key, b.key));
 
         } catch (FileNotFoundException e) {
@@ -71,15 +71,15 @@ public class timeMethods{
             binarysearch(key, sortedRecords);
         }
 
-              // Main experiment loop
+              
         for(repetition = 0; repetition < repetitions; repetition++) {
 
-            // Generate 30 random keys for this repetition
+            
             for (int j = 0; j < 30; j++) {
                 searchKeys[j] = rand.nextInt(N) + 1;
             }
 
-            // Time 30 linear searches
+            
             start = System.currentTimeMillis();
             performLinearSearch();
             finish = System.currentTimeMillis();
@@ -97,6 +97,58 @@ public class timeMethods{
         }
 
 
+         
+        double linearAveRuntime = linearRunTime / repetitions;
+        double linearStdDeviation = Math.sqrt((linearRunTime2 - repetitions * linearAveRuntime * linearAveRuntime) / (repetitions - 1));
+
+       
+        double binaryAveRuntime = binaryRunTime / repetitions;
+        double binaryStdDeviation = Math.sqrt((binaryRunTime2 - repetitions * binaryAveRuntime * binaryAveRuntime) / (repetitions - 1));
+
+        
+        System.out.println(fiveD.format(linearAveRuntime) + " " +
+                fourD.format(linearStdDeviation) + " " +
+                fiveD.format(binaryAveRuntime) + " " +
+                fourD.format(binaryStdDeviation));
+    }
+
+    
+    static void performLinearSearch() {
+        for (int i = 0; i < 30; i++) {
+            linearsearch(searchKeys[i], records);
+        }
+    }
+
+       // Binary search for a single key
+    static void binarysearch(int key, Node[] arr) {
+        int left = 1;
+        int right = N;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid].key == key) {
+                return;
+            }
+            if (arr[mid].key < key) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+}
+
+// Node class to store key-value pairs
+class Node {
+    int key;
+    String data;
+
+    Node(int k, String d) {
+        key = k;
+        data = d;
+    }
+}
   
 
     
